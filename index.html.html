@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sukang Nipa Eco-Tour Experience</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green-deep: #1a3a2a;
+      --green-mid: #2d5a3d;
+      --green-light: #4a7c5f;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --cream: #f5f0e8;
+      --white: #ffffff;
+      --text-dark: #1a1a1a;
+      --text-muted: #5a5a5a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--green-deep);
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: 
+        linear-gradient(160deg, rgba(10,30,20,0.85) 0%, rgba(26,58,42,0.7) 50%, rgba(45,90,61,0.6) 100%),
+        url('images/bgtop.jpg') center/cover no-repeat;
+      transform: scale(1.05);
+      animation: heroZoom 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1.05); }
+      to   { transform: scale(1.12); }
+    }
+
+    /* decorative diagonal stripe */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 80px;
+      background: var(--cream);
+      clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      animation: fadeUp 1s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1.2rem;
+      animation: fadeUp 1s 0.1s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+
+    .hero h1 span {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+
+    .hero-tagline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 1s 0.35s ease both;
+    }
+
+    .hero-tagline .dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold-light);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      animation: fadeUp 1s 0.5s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+      z-index: -1;
+    }
+
+    .btn-primary:hover { color: var(--green-deep); }
+    .btn-primary:hover::before { transform: scaleX(1); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 1.5rem; }
+
+    .container { max-width: 1000px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--green-deep);
+      line-height: 1.15;
+    }
+
+    /* ── WHAT IS SUKANG NIPA ── */
+    .about-section {
+      background: var(--cream);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    .about-text p {
+      margin-top: 1.5rem;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .about-img-wrap {
+      position: relative;
+    }
+
+    .about-img-wrap img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: -16px; left: -16px;
+      right: 16px; bottom: 16px;
+      border: 2px solid var(--gold);
+      z-index: 0;
+    }
+
+    .about-img-wrap img { position: relative; z-index: 1; }
+
+    /* ── ITINERARY ── */
+    .itinerary-section {
+      background: var(--green-deep);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .itinerary-section::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 0; right: 0;
+      height: 80px;
+      background: var(--cream);
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+    }
+
+    .itinerary-section .section-title { color: var(--white); }
+
+    .itinerary-section .section-label { color: var(--gold-light); }
+
+    .itinerary-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .itinerary-subtitle {
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.5);
+      font-style: italic;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 90px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold) 10%, var(--gold) 90%, transparent);
+    }
+
+    @media (max-width: 540px) {
+      .timeline::before { left: 60px; }
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2.2rem;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+
+    .timeline-time {
+      min-width: 90px;
+      text-align: right;
+      padding-top: 0.15rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 540px) {
+      .timeline-time { min-width: 60px; font-size: 0.65rem; }
+    }
+
+    .timeline-dot {
+      position: relative;
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 0.3rem;
+    }
+
+    .timeline-dot::after {
+      content: '';
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--green-deep);
+      box-shadow: 0 0 0 3px var(--gold);
+      flex-shrink: 0;
+    }
+
+    .timeline-body h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-body p {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+    }
+
+    /* ── ABOUT THE TOUR ── */
+    .tour-info-section {
+      background: var(--white);
+      position: relative;
+    }
+
+    .tour-info-section::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: 0; left: 0;
+      height: 80px;
+      background: var(--white);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
+
+    .tour-info-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 680px) {
+      .tour-info-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .tour-info-text p {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--text-muted);
+    }
+
+    .tour-highlights {
+      background: var(--green-deep);
+      padding: 2.5rem;
+      color: var(--white);
+    }
+
+    .tour-highlights h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .highlight-icon {
+      width: 32px; height: 32px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+
+    .highlight-item p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.5;
+    }
+
+    /* ── SUSTAINABILITY ── */
+    .sustain-section {
+      background: var(--cream);
+      text-align: center;
+    }
+
+    .sustain-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 640px) {
+      .sustain-cards { grid-template-columns: 1fr; }
+    }
+
+    .sustain-card {
+      background: var(--white);
+      padding: 2.5rem 1.5rem;
+      border-bottom: 3px solid var(--gold);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .sustain-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(26,58,42,0.1);
+    }
+
+    .sustain-card .icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .sustain-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--green-deep);
+      margin-bottom: 0.6rem;
+    }
+
+    .sustain-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--green-deep);
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 0; right: 0;
+      height: 80px;
+      background: var(--cream);
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+    }
+
+    .contact-section .section-title { color: var(--white); }
+    .contact-section .section-label { color: var(--gold-light); }
+
+    .contact-divider {
+      width: 60px; height: 1px;
+      background: var(--gold);
+      margin: 1.5rem auto;
+    }
+
+    .contact-detail {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+      margin: 0.5rem 0;
+      font-weight: 300;
+    }
+
+    .contact-detail a {
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-detail a:hover { color: var(--white); }
+
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .social-btn {
+      padding: 0.6rem 1.6rem;
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold-light);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .social-btn:hover {
+      background: var(--gold);
+      color: var(--green-deep);
+      border-color: var(--gold);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0f2219;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, padding 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(15,34,25,0.95);
+      backdrop-filter: blur(10px);
+      padding: 0.8rem 2rem;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      font-style: italic;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-links { display: flex; gap: 2rem; }
+
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold-light); }
+
+    @media (max-width: 540px) { .nav-links { display: none; } }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Sukang Nipa</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#itinerary">Itinerary</a>
+    <a href="#sustainability">Impact</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Welcome to</p>
+    <h1>Sukang Nipa<br><span>Eco-Tour</span><br>Experience</h1>
+    <div class="hero-tagline">
+      <span>Discover Culture</span>
+      <span class="dot"></span>
+      <span>Taste Tradition</span>
+      <span class="dot"></span>
+      <span>Support Locals</span>
+    </div>
+    <a href="#about" class="btn-primary">Explore the Tour</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="section-label">The Ingredient</p>
+        <h2 class="section-title">What is<br>Sukang Nipa?</h2>
+        <p>Sukang Nipa is a natural vinegar crafted from the fermented sap of the nipa palm — one of the Philippines' most treasured coastal plants. It is a staple in Filipino cuisine, prized for its distinctively sour taste, natural origins, and time-honored health benefits.</p>
+        <p>Rooted in the traditions of Pangasinan, this vinegar represents more than flavor — it embodies community, heritage, and a deep respect for the land.</p>
+      </div>
+      <div class="about-img-wrap reveal">
+        <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600" alt="Nipa Palm Vinegar" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section class="itinerary-section" id="itinerary">
+  <div class="container">
+    <div class="itinerary-header reveal">
+      <p class="section-label">The Journey</p>
+      <h2 class="section-title">Our Itinerary</h2>
+      <p class="itinerary-subtitle">Fermenting Experiences: Tree-to-Bottle Tour — Sukang Nipa as a Gastronomic Heritage in Pangasinan</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-time">9:00 – 8:45</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <h4>Assembly & Orientation</h4>
+          <p>Gather at PHINMA-University of Pangasinan for registration and orientation.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">8:45 – 9:45</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <h4>Travel to Buay</h4>
+          <p>Journey to the lush nipa farms where the adventure begins.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">9:45 – 10:30</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <h4>Vinegar Harvesting Experience</h4>
+          <p>Explore the cultural and culinary significance of the nipa palm. Experience tapping the palms and collecting sap under guidance of local farmers, then join an interactive Q&A.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">10:30 – 11:15</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <h4>Vinegar & Food Pairing</h4>
+          <p>Discover the unique taste of Sukang Nipa through a guided tasting session pairing it with bangus, bagoong, and chicharon.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">11:15 – 11:30</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <h4>Break & Transition</h4>
+          <p>A moment to rest and refresh before the afternoon's experiences.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">11:30 – 1:00</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <h4>Farm-to-Table Cooking & Communal Lunch</h4>
+          <p>Join local chefs preparing traditional Lingayen dishes featuring Sukang Nipa. Learn hands-on techniques, try crafting a local drink called "Turo," and enjoy a shared meal celebrating culture and community.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:00 – 1:45</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <h4>Souvenir Making & Packaging</h4>
+          <p>Bottle, seal, and label your very own Sukang Nipa. Personalize the label and gain insights into the role of Sukang Nipa in the broader kitchen.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:45 – 2:00</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <h4>Closing Program & Departure</h4>
+          <p>Reflect on the journey with a closing ceremony before heading out.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">2:00 – 2:30</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <h4>Quick Stop: Lingayen Public Market</h4>
+          <p>Browse local produce and artisan goods at the market.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">2:30 – 4:00</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <h4>Departure</h4>
+          <p>Return journey with memories, flavors, and a bottle of Sukang Nipa in hand.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT THE TOUR -->
+<section class="tour-info-section" id="tour-info">
+  <div class="container">
+    <div class="tour-info-grid">
+      <div class="tour-info-text reveal">
+        <p class="section-label">About the Tour</p>
+        <h2 class="section-title">A Cultural &<br>Eco-Tourism<br>Experience</h2>
+        <p>The Sukang Nipa Eco-Tour Experience is a hands-on cultural and eco-tourism activity that showcases the traditional process of making Sukang Nipa. This tour supports local farmers while preserving Filipino heritage and championing sustainable practices.</p>
+        <p>Designed for students and curious travelers alike, every stop on the itinerary connects participants to the land, the people, and the living traditions of Pangasinan.</p>
+      </div>
+      <div class="tour-highlights reveal">
+        <h3>What You'll Gain</h3>
+        <div class="highlight-item">
+          <div class="highlight-icon">🌿</div>
+          <p>Hands-on experience harvesting nipa sap and fermenting vinegar from scratch</p>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">🍽️</div>
+          <p>Farm-to-table cooking class with authentic Pangasinan cuisine</p>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">🏺</div>
+          <p>Your own personalized bottle of Sukang Nipa to take home</p>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">🤝</div>
+          <p>Direct engagement with local farming communities</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section class="sustain-section" id="sustainability">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Our Commitment</p>
+      <h2 class="section-title">Sustainability &<br>Community Impact</h2>
+    </div>
+    <div class="sustain-cards">
+      <div class="sustain-card reveal">
+        <div class="icon">🌾</div>
+        <h4>Supports Local Farmers</h4>
+        <p>Every tour directly benefits nipa palm farmers in Pangasinan, providing fair income and visibility for their craft.</p>
+      </div>
+      <div class="sustain-card reveal">
+        <div class="icon">🏛️</div>
+        <h4>Preserves Heritage</h4>
+        <p>Traditional vinegar-making methods are passed on to new generations through immersive, lived experience.</p>
+      </div>
+      <div class="sustain-card reveal">
+        <div class="icon">♻️</div>
+        <h4>Eco-Responsible Tourism</h4>
+        <p>Promoting low-impact travel that respects the environment, the ecosystem, and the communities we visit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Contact & Booking</h2>
+      <div class="contact-divider"></div>
+      <p class="contact-detail">📞 <a href="tel:09684442505">0968-444-2505</a></p>
+      <p class="contact-detail">✉️ <a href="mailto:albu.florendo.up@phinmaed.com">albu.florendo.up@phinmaed.com</a></p>
+      <div class="social-row">
+        <a class="social-btn" href="#">Facebook</a>
+        <a class="social-btn" href="#">Instagram</a>
+        <a class="social-btn" href="#">TikTok</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Sukang Nipa Eco-Tour Experience &nbsp;·&nbsp; PHINMA University of Pangasinan
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Timeline scroll reveal
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  const tlObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+        tlObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  timelineItems.forEach(el => tlObserver.observe(el));
+</script>
+</body>
+</html>
